@@ -1,0 +1,56 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 0 -> findLast Z >
+s 1 -> findLast O >
+findLast 0 -> findLast 0 >
+findLast 1 -> findLast 1 >
+findLast < -> findLast < >
+findLast _ -> replaceLast _ <
+findLast O -> replaceLast O <
+findLast Z -> replaceLast Z <
+replaceLast 1 -> findFirst O <
+replaceLast 0 -> findFirst Z <
+replaceLast < -> rj < >
+findFirst 0 -> findFirst 0 <
+findFirst 1 -> findFirst 1 <
+findFirst < -> findFirst < <
+findFirst O -> replaceFirst O >
+findFirst Z -> replaceFirst Z >
+replaceFirst 0 -> findLast Z >
+replaceFirst 1 -> findLast O >
+replaceFirst < -> checkRight < >
+checkRight 0 -> ac 0 ^
+checkRight 1 -> ac 1 ^
+checkRight O -> findStart O <
+checkRight Z -> findStart Z <
+findStart _ -> compare _ >
+findStart O -> findStart O <
+findStart Z -> findStart Z <
+findStart < -> findStart < <
+compare O -> o 1 >
+compare Z -> z 0 >
+o O -> o O >
+o Z -> o Z >
+o < -> compare1 < >
+z O -> z O >
+z Z -> z Z >
+z < -> compare0 < >
+compare1 0 -> compare1 0 >
+compare1 1 -> compare1 1 >
+compare1 O -> findLessLeft 1 <
+compare1 Z -> rj Z ^
+compare0 0 -> compare0 0 >
+compare0 1 -> compare0 1 >
+compare0 O -> ac O ^
+compare0 Z -> findLessLeft 0 <
+findLessLeft 0 -> findLessLeft 0 <
+findLessLeft 1 -> findLessLeft 1 <
+findLessLeft < -> findNotUsed < <
+findNotUsed 0 -> compare 0 >
+findNotUsed 1 -> compare 1 >
+findNotUsed O -> findNotUsed O <
+findNotUsed Z -> findNotUsed Z <
+compare < -> rj < ^

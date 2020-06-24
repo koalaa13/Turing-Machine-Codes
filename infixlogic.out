@@ -1,0 +1,158 @@
+3
+
+S 0 _ _ -> convert 0 ^ _ ^ _ ^
+S ( _ _ -> convert ( ^ _ ^ _ ^
+S 1 _ _ -> convert 1 ^ _ ^ _ ^
+convert 0 _ _ -> convert _ > _ ^ 0 >
+convert 1 _ _ -> convert _ > _ ^ 1 >
+convert ( _ _ -> convert _ > ( > _ ^
+convert ) _ _ -> putToAns _ > _ ^ _ ^
+putToAns a _ _ -> putToAns a ^ _ < _ ^ 
+putToAns o _ _ -> putToAns o ^ _ < _ ^
+putToAns a o _ -> putToAns a ^ _ < o >
+putToAns o o _ -> putToAns o ^ _ < o >
+putToAns a a _ -> putToAns a ^ _ < a >
+putToAns o a _ -> putToAns o ^ _ < a >
+putToAns a ( _ -> convert a ^ _ ^ _ ^
+putToAns o ( _ -> convert o ^ _ ^ _ ^
+putToAns ) _ _ -> putToAns ) ^ _ < _ ^ 
+putToAns ) _ _ -> putToAns ) ^ _ < _ ^
+putToAns ) o _ -> putToAns ) ^ _ < o >
+putToAns ) o _ -> putToAns ) ^ _ < o >
+putToAns ) a _ -> putToAns ) ^ _ < a >
+putToAns ) a _ -> putToAns ) ^ _ < a >
+putToAns ) ( _ -> convert ) ^ _ ^ _ ^
+putToAns ) ( _ -> convert ) ^ _ ^ _ ^
+putToAns _ _ _ -> putToAns _ ^ _ < _ ^ 
+putToAns _ _ _ -> putToAns _ ^ _ < _ ^
+putToAns _ o _ -> putToAns _ ^ _ < o >
+putToAns _ o _ -> putToAns _ ^ _ < o >
+putToAns _ a _ -> putToAns _ ^ _ < a >
+putToAns _ a _ -> putToAns _ ^ _ < a >
+putToAns _ ( _ -> convert _ ^ _ ^ _ ^
+putToAns _ ( _ -> convert _ ^ _ ^ _ ^
+convert a _ _ -> convert _ > a > _ ^
+convert o _ _ -> removeAnds _ > _ < _ ^
+removeAnds 0 _ _ -> convert 0 ^ o > _ ^
+removeAnds 1 _ _ -> convert 1 ^ o > _ ^
+removeAnds a _ _ -> convert a ^ o > _ ^
+removeAnds o _ _ -> convert o ^ o > _ ^
+removeAnds ( _ _ -> convert ( ^ o > _ ^
+removeAnds ) _ _ -> convert ) ^ o > _ ^
+removeAnds 0 o _ -> putOr 0 ^ o > _ ^
+removeAnds 1 o _ -> putOr 1 ^ o > _ ^
+removeAnds a o _ -> putOr a ^ o > _ ^
+removeAnds o o _ -> putOr o ^ o > _ ^
+removeAnds ( o _ -> putOr ( ^ o > _ ^
+removeAnds ) o _ -> putOr ) ^ o > _ ^
+removeAnds 0 ( _ -> putOr 0 ^ ( > _ ^
+removeAnds 1 ( _ -> putOr 1 ^ ( > _ ^
+removeAnds a ( _ -> putOr a ^ ( > _ ^
+removeAnds o ( _ -> putOr o ^ ( > _ ^
+removeAnds ( ( _ -> putOr ( ^ ( > _ ^
+removeAnds ) ( _ -> putOr ) ^ ( > _ ^
+removeAnds 0 a _ -> removeAnds 0 ^ _ < a >
+removeAnds 1 a _ -> removeAnds 1 ^ _ < a >
+removeAnds a a _ -> removeAnds a ^ _ < a >
+removeAnds o a _ -> removeAnds o ^ _ < a >
+removeAnds ( a _ -> removeAnds ( ^ _ < a >
+removeAnds ) a _ -> removeAnds ) ^ _ < a >
+putOr 0 _ _ -> convert 0 ^ o > _ ^
+putOr 1 _ _ -> convert 1 ^ o > _ ^
+putOr a _ _ -> convert a ^ o > _ ^
+putOr o _ _ -> convert o ^ o > _ ^
+putOr ( _ _ -> convert ( ^ o > _ ^
+putOr ) _ _ -> convert ) ^ o > _ ^
+convert _ _ _ -> clearStack _ ^ _ < _ ^
+clearStack _ _ _ -> findStart _ ^ _ ^ _ <
+clearStack _ a _ -> clearStack _ ^ _ < a >
+clearStack _ o _ -> clearStack _ ^ _ < o >
+findStart _ _ _ -> parse _ ^ _ ^ _ >
+findStart _ _ 0 -> findStart _ ^ _ ^ 0 < 
+findStart _ _ 1 -> findStart _ ^ _ ^ 1 <
+findStart _ _ o -> findStart _ ^ _ ^ o <
+findStart _ _ a -> findStart _ ^ _ ^ a <
+
+parse _ _ 1 -> parse 1 > _ ^ 1 >
+parse _ _ 0 -> parse 0 > _ ^ 0 >
+parse _ _ o -> calcOr _ < _ ^ o >
+parse _ _ a -> calcAnd _ < _ ^ a >
+
+calcAnd 1 _ 1 -> calcAnd1 _ < _ ^ 1 ^
+calcAnd 1 _ 0 -> calcAnd1 _ < _ ^ 0 ^
+calcAnd 1 _ a -> calcAnd1 _ < _ ^ a ^
+calcAnd 1 _ o -> calcAnd1 _ < _ ^ o ^
+calcAnd 1 _ _ -> calcAnd1 _ < _ ^ _ ^
+
+calcAnd 0 _ 1 -> calcAnd0 _ < _ ^ 1 ^
+calcAnd 0 _ 0 -> calcAnd0 _ < _ ^ 0 ^
+calcAnd 0 _ a -> calcAnd0 _ < _ ^ a ^
+calcAnd 0 _ o -> calcAnd0 _ < _ ^ o ^
+calcAnd 0 _ _ -> calcAnd0 _ < _ ^ _ ^
+
+calcOr 1 _ 1 -> calcOr1 _ < _ ^ 1 ^
+calcOr 1 _ 0 -> calcOr1 _ < _ ^ 0 ^
+calcOr 1 _ a -> calcOr1 _ < _ ^ a ^
+calcOr 1 _ o -> calcOr1 _ < _ ^ o ^
+calcOr 1 _ _ -> calcOr1 _ < _ ^ _ ^
+
+calcOr 0 _ 1 -> calcOr0 _ < _ ^ 1 ^
+calcOr 0 _ 0 -> calcOr0 _ < _ ^ 0 ^
+calcOr 0 _ a -> calcOr0 _ < _ ^ a ^
+calcOr 0 _ o -> calcOr0 _ < _ ^ o ^
+calcOr 0 _ _ -> calcOr0 _ < _ ^ _ ^
+
+calcAnd1 1 _ 0 -> parse 1 > _ ^ 0 ^
+calcAnd1 1 _ 1 -> parse 1 > _ ^ 1 ^
+calcAnd1 1 _ a -> parse 1 > _ ^ a ^
+calcAnd1 1 _ o -> parse 1 > _ ^ o ^
+calcAnd1 1 _ _ -> parse 1 > _ ^ _ ^
+
+calcAnd1 0 _ 0 -> parse 0 > _ ^ 0 ^
+calcAnd1 0 _ 1 -> parse 0 > _ ^ 1 ^
+calcAnd1 0 _ a -> parse 0 > _ ^ a ^
+calcAnd1 0 _ o -> parse 0 > _ ^ o ^
+calcAnd1 0 _ _ -> parse 0 > _ ^ _ ^
+
+calcAnd0 1 _ 0 -> parse 0 > _ ^ 0 ^
+calcAnd0 1 _ 1 -> parse 0 > _ ^ 1 ^
+calcAnd0 1 _ a -> parse 0 > _ ^ a ^
+calcAnd0 1 _ o -> parse 0 > _ ^ o ^
+calcAnd0 1 _ _ -> parse 0 > _ ^ _ ^
+
+calcAnd0 0 _ 0 -> parse 0 > _ ^ 0 ^
+calcAnd0 0 _ 1 -> parse 0 > _ ^ 1 ^
+calcAnd0 0 _ a -> parse 0 > _ ^ a ^
+calcAnd0 0 _ o -> parse 0 > _ ^ o ^
+calcAnd0 0 _ _ -> parse 0 > _ ^ _ ^
+
+calcOr1 1 _ 0 -> parse 1 > _ ^ 0 ^
+calcOr1 1 _ 1 -> parse 1 > _ ^ 1 ^
+calcOr1 1 _ o -> parse 1 > _ ^ o ^
+calcOr1 1 _ a -> parse 1 > _ ^ a ^
+calcOr1 1 _ _ -> parse 1 > _ ^ _ ^
+
+calcOr1 0 _ 0 -> parse 1 > _ ^ 0 ^
+calcOr1 0 _ 1 -> parse 1 > _ ^ 1 ^
+calcOr1 0 _ o -> parse 1 > _ ^ o ^
+calcOr1 0 _ a -> parse 1 > _ ^ a ^
+calcOr1 0 _ _ -> parse 1 > _ ^ _ ^
+
+calcOr0 1 _ 0 -> parse 1 > _ ^ 0 ^
+calcOr0 1 _ 1 -> parse 1 > _ ^ 1 ^
+calcOr0 1 _ o -> parse 1 > _ ^ o ^
+calcOr0 1 _ a -> parse 1 > _ ^ a ^
+calcOr0 1 _ _ -> parse 1 > _ ^ _ ^
+
+calcOr0 0 _ 0 -> parse 0 > _ ^ 0 ^
+calcOr0 0 _ 1 -> parse 0 > _ ^ 1 ^
+calcOr0 0 _ o -> parse 0 > _ ^ o ^
+calcOr0 0 _ a -> parse 0 > _ ^ a ^
+calcOr0 0 _ _ -> parse 0 > _ ^ _ ^
+
+parse _ _ _ -> clearTape3 _ ^ _ ^ _ <
+clearTape3 _ _ _ -> AC _ < _ ^ _ ^
+clearTape3 _ _ 0 -> clearTape3 _ ^ _ ^ _ <
+clearTape3 _ _ 1 -> clearTape3 _ ^ _ ^ _ <
+clearTape3 _ _ o -> clearTape3 _ ^ _ ^ _ <
+clearTape3 _ _ a -> clearTape3 _ ^ _ ^ _ <

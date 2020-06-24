@@ -1,0 +1,92 @@
+2
+
+S 1 _ -> parse 1 ^ _ ^
+S 0 _ -> parse 0 ^ _ ^
+parse 1 _ -> parse 1 > 1 >
+parse 0 _ -> parse 0 > 0 >
+parse a _ -> calcAnd a > _ <
+parse o _ -> calcOr o > _ <
+
+calcAnd 1 1 -> calcAnd1 1 ^ _ <
+calcAnd 0 1 -> calcAnd1 0 ^ _ <
+calcAnd a 1 -> calcAnd1 a ^ _ <
+calcAnd o 1 -> calcAnd1 o ^ _ <
+calcAnd _ 1 -> calcAnd1 _ ^ _ <
+
+calcAnd 1 0 -> calcAnd0 1 ^ _ < 
+calcAnd 0 0 -> calcAnd0 0 ^ _ <
+calcAnd a 0 -> calcAnd0 a ^ _ <
+calcAnd o 0 -> calcAnd0 o ^ _ <
+calcAnd _ 0 -> calcAnd0 _ ^ _ <
+
+calcAnd1 1 1 -> parse 1 ^ 1 >
+calcAnd1 0 1 -> parse 0 ^ 1 >
+calcAnd1 o 1 -> parse o ^ 1 >
+calcAnd1 a 1 -> parse a ^ 1 >
+calcAnd1 _ 1 -> parse _ ^ 1 >
+
+calcAnd1 1 0 -> parse 1 ^ 0 >
+calcAnd1 0 0 -> parse 0 ^ 0 >
+calcAnd1 o 0 -> parse o ^ 0 >
+calcAnd1 a 0 -> parse a ^ 0 >
+calcAnd1 _ 0 -> parse _ ^ 0 >
+
+calcAnd0 1 1 -> parse 1 ^ 0 >
+calcAnd0 0 1 -> parse 0 ^ 0 >
+calcAnd0 o 1 -> parse o ^ 0 >
+calcAnd0 a 1 -> parse a ^ 0 >
+calcAnd0 _ 1 -> parse _ ^ 0 >
+
+calcAnd0 1 0 -> parse 1 ^ 0 >
+calcAnd0 0 0 -> parse 0 ^ 0 >
+calcAnd0 o 0 -> parse o ^ 0 >
+calcAnd0 a 0 -> parse a ^ 0 >
+calcAnd0 _ 0 -> parse _ ^ 0 >
+
+calcOr 1 1 -> calcOr1 1 ^ _ <
+calcOr 0 1 -> calcOr1 0 ^ _ <
+calcOr a 1 -> calcOr1 a ^ _ <
+calcOr o 1 -> calcOr1 o ^ _ <
+calcOr _ 1 -> calcOr1 _ ^ _ <
+
+calcOr 1 0 -> calcOr0 1 ^ _ <
+calcOr 0 0 -> calcOr0 0 ^ _ <
+calcOr a 0 -> calcOr0 a ^ _ <
+calcOr o 0 -> calcOr0 o ^ _ <
+calcOr _ 0 -> calcOr0 _ ^ _ <
+
+calcOr1 1 1 -> parse 1 ^ 1 >
+calcOr1 0 1 -> parse 0 ^ 1 >
+calcOr1 a 1 -> parse a ^ 1 >
+calcOr1 o 1 -> parse o ^ 1 >
+calcOr1 _ 1 -> parse _ ^ 1 >
+
+calcOr1 1 0 -> parse 1 ^ 1 >
+calcOr1 0 0 -> parse 0 ^ 1 >
+calcOr1 a 0 -> parse a ^ 1 >
+calcOr1 o 0 -> parse o ^ 1 >
+calcOr1 _ 0 -> parse _ ^ 1 >
+
+calcOr0 1 1 -> parse 1 ^ 1 >
+calcOr0 0 1 -> parse 0 ^ 1 >
+calcOr0 a 1 -> parse a ^ 1 >
+calcOr0 o 1 -> parse o ^ 1 >
+calcOr0 _ 1 -> parse _ ^ 1 >
+
+calcOr0 1 0 -> parse 1 ^ 0 >
+calcOr0 0 0 -> parse 0 ^ 0 >
+calcOr0 a 0 -> parse a ^ 0 >
+calcOr0 o 0 -> parse o ^ 0 >
+calcOr0 _ 0 -> parse _ ^ 0 >
+
+parse _ _ -> putAns _ ^ _ <
+putAns _ 1 -> fillLeft 1 < _ ^
+putAns _ 0 -> fillLeft 0 < _ ^
+fillLeft 0 _ -> fillLeft S < _ ^
+fillLeft 1 _ -> fillLeft S < _ ^
+fillLeft a _ -> fillLeft S < _ ^
+fillLeft o _ -> fillLeft S < _ ^
+fillLeft _ _ -> clearRight _ > _ ^
+clearRight S _ -> clearRight _ > _ ^
+clearRight 0 _ -> AC 0 ^ _ ^
+clearRight 1 _ -> AC 1 ^ _ ^

@@ -1,0 +1,31 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s _ -> ac _ ^
+s 0 -> findPlus 0 >
+s 1 -> findPlus 1 >
+findPlus + -> isB0 + >
+findPlus 0 -> findPlus 0 >
+findPlus 1 -> findPlus 1 >
+isB0 1 -> findEndB 1 >
+isB0 0 -> isB0 0 >
+isB0 _ -> clearB _ <
+clearB 0 -> clearB _ <
+clearB 1 -> clearB _ <
+clearB + -> findStartA _ <
+findStartA 0 -> findStartA 0 <
+findStartA 1 -> findStartA 1 <
+findStartA _ -> ac _ >
+findEndB 0 -> findEndB 0 >
+findEndB 1 -> findEndB 1 >
+findEndB _ -> decB _ <
+decB 0 -> decB 1 <
+decB 1 -> findPlusLeft 0 <
+findPlusLeft 0 -> findPlusLeft 0 <
+findPlusLeft 1 -> findPlusLeft 1 <
+findPlusLeft + -> incA + <
+incA 1 -> incA 0 <
+incA _ -> findPlus 1 >
+incA 0 -> findPlus 1 >
